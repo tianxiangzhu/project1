@@ -22,6 +22,8 @@ function strinc (str,inc){
 }
 const services = {
     findbusinesses:(text,city,state) => {
+        const api = `http://localhost:3000/search/${text}/${city},${state}`
+        return fetch(api)
         if (text == ""){
             return []
         }
@@ -35,30 +37,35 @@ const services = {
     
     },
     addbusiness:(business) => {
-        business.active = true
-        business.id = businesses.length
-        businesses.push(business)
+        const api = `http://localhost:3000/place`
+        fetch(api,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(business)}
+        ).catch(e => console.log("Error",e))
     },
     updatebusiness:(business) => {
-        businesses[business.id] = business
-        
+        business.update = true
+        services.addbusiness(business)
     },
     deletebusiness:(id) => {
         businesses[id].active = false
     }
     ,
     allbusinesses:() => {
-       return businesses 
+        const api = "http://localhost:3000/places"
+        return fetch(api)
+       
     },
     businessbyid:(id) => {
         return businesses[id]
     },
     addreview:(id,review) => {
+        console.log("addreview",id,review)
         const b = businesses[id]
         b.reviews.push(review)
-
     }
-    
-
 }
 export default services;

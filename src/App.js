@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Home from './components/Home'
+import {
+  BrowserRouter,
+  Switch,
+  Route
+} from "react-router-dom";
+import Login from './components/Login';
+import AddBusiness from "./components/AddBusiness";
+import Business from './components/Business';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <Switch>
+        <Route exact path='/' render={props => <Home {...props} />}/>
+        <Route path='/login' >
+          <Login className="login" />
+        </Route>
+        <Route path='/add' render={props => <AddBusiness {...props} />}/>
+        <Route path='/update' render={props => <AddBusiness update="true" {...props} />}/>
+        <Route path='/business' render={props => <Business  {...props} />}/>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

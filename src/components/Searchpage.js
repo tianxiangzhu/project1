@@ -16,9 +16,17 @@ import data from "../database/data";
     }
     livesearch = (event) => {
         const text = event.target.value;
-        const businesses = data.findbusinesses(text,this.state.city,this.state.state)
-        this.setState({ businesses: businesses,searchtext: text});
+        this.setState({searchtext: text})
+        if (text == '')
+        {
+            this.setState({businesses: []})
+            return 
+        }
+         data.findbusinesses(text,this.state.city,this.state.state).then(x => x.json())
+         .then(b =>{console.log("bussiness",b);this.setState({businesses:b})})
+         .catch(e => console.log("Failed",e))
     }
+
     citysearch = (event) => {
         const text = event.target.value;
         this.setState({ city: text,});

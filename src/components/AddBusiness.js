@@ -13,16 +13,20 @@ export default class AddBusiness extends React.Component{
         if (props.update){
             this.state.update = true
             const id = props.location.state.id
-            const p = data.allbusinesses()[id]
-            this.state.username = p.username
-            this.state.id = p.id
-            this.state.name = p.name
-            this.state.address = p.address
-            this.state.city = p.city
-            this.state.state = p.state
-            this.state.zip = p.zip
-            this.state.phone = p.phone
-            this.state.active = p.active
+            data.allbusinesses().then(x => x.json())
+            .then(bs =>{
+                let b = bs.find(bsz => bsz.id == id)
+                this.setState({
+                    id : b.id,
+                    name : b.name,
+                    address : b.address,
+                    city : b.city,
+                    state : b.state,
+                    zip : b.zip,
+                    phone : b.phone
+                })
+            })
+            .catch(e => console.log("Fetch Failed",e))
         }
     }
 onInputChange = (event) => {

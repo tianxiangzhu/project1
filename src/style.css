@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+.container {
+  position: relative;
+  width: 90%;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  top: 25px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+
+.title {
+  position: relative;
+  background-color:rgba(0, 78, 151, 0.6);
+  color: aliceblue;
+  padding: 20px;
+  font-family: monospace;
+  font-size: 2em;
+  border-radius: 5px;
+}
+
+.question {
+  font-size: 1.2em;
+  font-weight: bold;
+  font-family: cursive;
+  margin-bottom: 5px;
+  border-radius: 10px;
+}
+
+.questionBox {
+  text-align: center;
+  position: relative;
+  border: 1px solid black;
+  margin-top: 5px;
+  padding: 15px;
+  box-sizing: border-box;
+  background-color:white;
+  border-radius: 10px;
+}
+
+.answerBtn {
+  
+  position: relative;
+  padding: 10px;
+  background-color: rgba(0, 78, 151, 0.6);
+  display: inline-block;
+  margin: 10px;
+  outline: none;
+  border: none;
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.score-board {
+  position: relative;
+  height: 700px;
+}
+
+.score {
+  position: absolute;
+  width: 1024px;
+  font-size: 3em;
+  top: 250px;
+  text-align: center;
+}
+
+.playBtn {
+  position: absolute;
+  font-size: 1.4em;
+  padding: 10px;
+  top: 350px;
+  border:0;
+  background-color: black;
+  color: white;
+  width: 150px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  outline: none;
+  cursor: pointer;
+}
+.playBtn:hover{
+  background-color: lightblue;
+  color: black;
+}

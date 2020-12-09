@@ -22,7 +22,7 @@ function strinc (str,inc){
 }
 const services = {
     findbusinesses:(text,city,state) => {
-        const api = `http://localhost:3000/search/${text}/${city},${state}`
+        const api = `https://tianxiangzhu-nearbyplaces.herokuapp.com/search/${text}/${city},${state}`
         return fetch(api)
         if (text == ""){
             return []
@@ -37,7 +37,7 @@ const services = {
     
     },
     addbusiness:(business) => {
-        const api = `http://localhost:3000/place`
+        const api = `https://tianxiangzhu-nearbyplaces.herokuapp.com/place`
         fetch(api,{
             method: "POST",
             headers: {
@@ -51,11 +51,18 @@ const services = {
         services.addbusiness(business)
     },
     deletebusiness:(id) => {
-        businesses[id].active = false
+        const api = `https://tianxiangzhu-nearbyplaces-api.herokuapp.com/place/${id}`
+        return fetch(api,{
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            }
+        )
     }
     ,
     allbusinesses:() => {
-        const api = "http://localhost:3000/places"
+        const api = "https://tianxiangzhu-nearbyplaces-api.herokuapp.com/places"
         return fetch(api)
        
     },
@@ -63,9 +70,20 @@ const services = {
         return businesses[id]
     },
     addreview:(id,review) => {
-        console.log("addreview",id,review)
         const b = businesses[id]
         b.reviews.push(review)
+        const api = `https://tianxiangzhu-nearbyplaces-api.herokuapp.com/review/${id}`
+        return fetch(api,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({review: review})}
+        )
+    },
+    get_reviews:(bs) => {
+        const api = `https://tianxiangzhu-nearbyplaces-api.herokuapp.com/reviews/${bs.join(",")}`
+        return fetch(api)
     }
 }
 export default services;

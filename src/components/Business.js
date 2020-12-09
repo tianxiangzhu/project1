@@ -7,17 +7,23 @@ export default class Business extends React.Component{
     constructor(props){
         super(props)
         this.state = {ids: props.location.state.bs, reviewinp: null, reviewtext: "" }
-
+        this.get_bus()
     }
     reviewclick = (event) =>{
         this.setState({reviewinp: event.target.getAttribute("business")})
     }
     onSubmit = (event) => {
-
         data.addreview(this.state.reviewinp,this.state.reviewtext)
         this.setState({reviewinp: null})
         event.preventDefault();
         this.forceUpdate()
+    }
+    get_bus = () => {
+        data.allbusinesses().then(x => x.json())
+            .then(allbs => {
+                let bs = allbs.filter(b => this.state.ids.indexOf(b.id) != -1)
+                this.setState({businesses: bs})
+                })
     }
     reviewchange = (event) => {
         const value = event.target.value;
